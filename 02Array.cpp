@@ -1,140 +1,168 @@
 #include <iostream>
 using namespace std;
 
-const int SIZE = 3;
-
-void printMatrix(int mat[SIZE][SIZE], string label) {
-    cout << label << ":\n";
-    for(int i = 0; i < SIZE; i++) {
-        for(int j = 0; j < SIZE; j++) {
-            cout << mat[i][j] << "\t";
-        }
-        cout << "\n";
-    }
-}
-
-void inputMatrix(int mat[SIZE][SIZE], string label) {
-    cout << "Input " << label << " (" << SIZE << "x" << SIZE << "):\n";
-    for(int i = 0; i < SIZE; i++) {
-        for(int j = 0; j < SIZE; j++) {
-            cout << "[" << i << "][" << j << "]: ";
-            cin >> mat[i][j];
-        }
-    }
-}
-
-void addMatrix() {
-    int A[SIZE][SIZE], B[SIZE][SIZE], C[SIZE][SIZE];
-    
-    cout << "\n=== MATRIX ADDITION ===\n";
-    inputMatrix(A, "Matrix A");
-    inputMatrix(B, "Matrix B");
-    
-    // A + B = C
-    for(int i = 0; i < SIZE; i++) {
-        for(int j = 0; j < SIZE; j++) {
-            C[i][j] = A[i][j] + B[i][j];
-        }
-    }
-    
-    cout << "\n";
-    printMatrix(A, "Matrix A");
-    cout << "\n";
-    printMatrix(B, "Matrix B");
-    cout << "\n";
-    printMatrix(C, "Result (A + B)");
-}
-
-void multiplyMatrix() {
-    int A[SIZE][SIZE], B[SIZE][SIZE], C[SIZE][SIZE] = {0};
-    
-    cout << "\n=== MATRIX MULTIPLICATION ===\n";
-    inputMatrix(A, "Matrix A");
-    inputMatrix(B, "Matrix B");
-    
-    // A × B = C
-    for(int i = 0; i < SIZE; i++) {
-        for(int j = 0; j < SIZE; j++) {
-            for(int k = 0; k < SIZE; k++) {
-                C[i][j] += A[i][k] * B[k][j];
-            }
-        }
-    }
-    
-    cout << "\n";
-    printMatrix(A, "Matrix A");
-    cout << "\n";
-    printMatrix(B, "Matrix B");
-    cout << "\n";
-    printMatrix(C, "Result (A × B)");
-}
-
-void sizeofDemo() {
-    cout << "\n=== sizeof() DEMONSTRATION ===\n";
-    
-    int arrInt[] = {10, 20, 30, 40, 50};
-    double arrDouble[] = {1.5, 2.5, 3.5, 4.5};
-    char arrChar[] = {'A', 'B', 'C', 'D', 'E', 'F'};
-    int matrix[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
-    
-    int lenInt = sizeof(arrInt) / sizeof(arrInt[0]);
-    int lenDouble = sizeof(arrDouble) / sizeof(arrDouble[0]);
-    int lenChar = sizeof(arrChar) / sizeof(arrChar[0]);
-    int rows = sizeof(matrix) / sizeof(matrix[0]);
-    int cols = sizeof(matrix[0]) / sizeof(matrix[0][0]);
-    
-    cout << "\nint array[" << lenInt << "]: ";
-    for(int i = 0; i < lenInt; i++) cout << arrInt[i] << " ";
-    cout << "\n  Total: " << sizeof(arrInt) << " bytes | Per element: " 
-         << sizeof(arrInt[0]) << " bytes\n";
-    
-    cout << "\ndouble array[" << lenDouble << "]: ";
-    for(int i = 0; i < lenDouble; i++) cout << arrDouble[i] << " ";
-    cout << "\n  Total: " << sizeof(arrDouble) << " bytes | Per element: " 
-         << sizeof(arrDouble[0]) << " bytes\n";
-    
-    cout << "\nchar array[" << lenChar << "]: ";
-    for(int i = 0; i < lenChar; i++) cout << arrChar[i] << " ";
-    cout << "\n  Total: " << sizeof(arrChar) << " bytes | Per element: " 
-         << sizeof(arrChar[0]) << " bytes\n";
-    
-    cout << "\nMatrix[" << rows << "][" << cols << "]:\n";
-    for(int i = 0; i < rows; i++) {
-        cout << "  ";
-        for(int j = 0; j < cols; j++) {
-            cout << matrix[i][j] << " ";
-        }
-        cout << "\n";
-    }
-    cout << "  Total elements: " << rows * cols << "\n";
-    
-    cout << "\nFormula: length = sizeof(array) / sizeof(array[0])\n";
-}
-
 int main() {
-    int choice;
+    int pilih;
     
     do {
-        cout << "\n================================\n";
-        cout << "  MATRIX & ARRAY OPERATIONS\n";
-        cout << "================================\n";
-        cout << "1. Matrix Addition (3x3)\n";
-        cout << "2. Matrix Multiplication (3x3)\n";
-        cout << "3. sizeof() Demo\n";
-        cout << "0. Exit\n";
-        cout << "================================\n";
-        cout << "Choice: ";
-        cin >> choice;
+        cout << "\n==== PROGRAM MATRIKS ====\n";
+        cout << "1. Tambah Matriks\n";
+        cout << "2. Kali Matriks\n";
+        cout << "3. Demo sizeof\n";
+        cout << "0. Keluar\n";
+        cout << "Pilih: ";
+        cin >> pilih;
         
-        switch(choice) {
-            case 1: addMatrix(); break;
-            case 2: multiplyMatrix(); break;
-            case 3: sizeofDemo(); break;
-            case 0: cout << "\nExiting...\n"; break;
-            default: cout << "\nInvalid choice!\n";
+        if (pilih == 1) {
+            // Penjumlahan Matriks
+            int A[3][3], B[3][3], C[3][3];
+            
+            cout << "\nMatriks A (3x3):\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << "A[" << i << "][" << j << "]: ";
+                    cin >> A[i][j];
+                }
+            }
+            
+            cout << "\nMatriks B (3x3):\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << "B[" << i << "][" << j << "]: ";
+                    cin >> B[i][j];
+                }
+            }
+            
+            // Hitung A + B
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    C[i][j] = A[i][j] + B[i][j];
+                }
+            }
+            
+            // Tampilkan hasil
+            cout << "\nMatriks A:\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << A[i][j] << " ";
+                }
+                cout << "\n";
+            }
+            
+            cout << "\nMatriks B:\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << B[i][j] << " ";
+                }
+                cout << "\n";
+            }
+            
+            cout << "\nHasil A + B:\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << C[i][j] << " ";
+                }
+                cout << "\n";
+            }
+        }
+        else if (pilih == 2) {
+            // Perkalian Matriks
+            int A[3][3], B[3][3], C[3][3];
+            
+            cout << "\nMatriks A (3x3):\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << "A[" << i << "][" << j << "]: ";
+                    cin >> A[i][j];
+                }
+            }
+            
+            cout << "\nMatriks B (3x3):\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << "B[" << i << "][" << j << "]: ";
+                    cin >> B[i][j];
+                }
+            }
+            
+            // Hitung A x B
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    C[i][j] = 0;
+                    for (int k = 0; k < 3; k++) {
+                        C[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+            
+            // Tampilkan hasil
+            cout << "\nMatriks A:\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << A[i][j] << " ";
+                }
+                cout << "\n";
+            }
+            
+            cout << "\nMatriks B:\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << B[i][j] << " ";
+                }
+                cout << "\n";
+            }
+            
+            cout << "\nHasil A x B:\n";
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    cout << C[i][j] << " ";
+                }
+                cout << "\n";
+            }
+        }
+        else if (pilih == 3) {
+            // Demo sizeof
+            cout << "\n=== Demo sizeof ===\n";
+            
+            int arr1[] = {10, 20, 30, 40, 50};
+            double arr2[] = {1.5, 2.5, 3.5, 4.5};
+            char arr3[] = {'A', 'B', 'C', 'D', 'E', 'F'};
+            
+            int panjang1 = sizeof(arr1) / sizeof(arr1[0]);
+            int panjang2 = sizeof(arr2) / sizeof(arr2[0]);
+            int panjang3 = sizeof(arr3) / sizeof(arr3[0]);
+            
+            cout << "\nArray int: ";
+            for (int i = 0; i < panjang1; i++) {
+                cout << arr1[i] << " ";
+            }
+            cout << "\nTotal: " << sizeof(arr1) << " bytes";
+            cout << "\nPer elemen: " << sizeof(arr1[0]) << " bytes\n";
+            
+            cout << "\nArray double: ";
+            for (int i = 0; i < panjang2; i++) {
+                cout << arr2[i] << " ";
+            }
+            cout << "\nTotal: " << sizeof(arr2) << " bytes";
+            cout << "\nPer elemen: " << sizeof(arr2[0]) << " bytes\n";
+            
+            cout << "\nArray char: ";
+            for (int i = 0; i < panjang3; i++) {
+                cout << arr3[i] << " ";
+            }
+            cout << "\nTotal: " << sizeof(arr3) << " bytes";
+            cout << "\nPer elemen: " << sizeof(arr3[0]) << " bytes\n";
+            
+            cout << "\nRumus: panjang = sizeof(array) / sizeof(array[0])\n";
+        }
+        else if (pilih == 0) {
+            cout << "\nTerima kasih!\n";
+        }
+        else {
+            cout << "\nPilihan salah!\n";
         }
         
-    } while(choice != 0);
+    } while (pilih != 0);
     
     return 0;
 }
